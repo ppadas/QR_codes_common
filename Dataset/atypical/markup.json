@@ -1,0 +1,13 @@
+{
+  "types_list": [
+    {
+      "id": 0,
+      "name": "QR-code"
+    },
+    {
+      "id": 1,
+      "name": "Data matrix"
+    }
+  ],
+  "objects": []
+}
