@@ -4,7 +4,7 @@ from copy import copy
 import argparse
 
 def fix_markup_for_present_image(image_info, dir_name, names_translation, markups):
-    image_name = image_info["image"]
+    image_name = image_info["image"].partition(".rf.")[0]
     current_index_name = names_translation["translation"][image_name].split("/")[-1]
     image_info["image"] = current_index_name
     index = 0
@@ -29,7 +29,8 @@ def insert_new_value_in_markup(image_info, dir_name, names_translation, markups)
     names_translation["dirs_info"][dir_name] += 1
     image_format = image_name.split('.')[-1]
     image_info["image"] = f'{current_index:05}.{image_format}'
-    names_translation["translation"][image_name] = dir_name + "/" + image_info["image"]
+    names_translation["translation"][image_name.partition(".rf.")[0]] = \
+        dir_name + "/" + image_info["image"]
     markups[dir_name]["objects"].append(image_info)
     image_info_level_up = copy(image_info)
     image_info_level_up["image"] = dir_name + "/" + image_info_level_up["image"]
@@ -38,15 +39,13 @@ def insert_new_value_in_markup(image_info, dir_name, names_translation, markups)
 
 def insert_in_markup(image_info, dir_name, names_translation, markups):
     image_name = image_info["image"]
-    if image_name in names_translation["translation"]:
+    if image_name.partition(".rf.")[0] in names_translation["translation"]:
         fix_markup_for_present_image(image_info, dir_name, names_translation, markups)
     else:
         insert_new_value_in_markup(image_info, dir_name, names_translation, markups)
 
 def define_folder(qr_counter, dm_counter, atypical_counter):
-    if atypical_counter != 0:
-        return True, "atypical"
-    elif dm_counter != 0 and qr_counter != 0:
+    if dm_counter != 0 and qr_counter != 0:
         return True, "dm_qr"
     elif dm_counter == 0 and qr_counter == 1:
         return True, "qr_1"
@@ -56,6 +55,8 @@ def define_folder(qr_counter, dm_counter, atypical_counter):
         return True, "dm_1"
     elif dm_counter > 1 and qr_counter == 0:  
         return True, "dm_many"  
+    elif atypical_counter != 0:
+        return True, "atypical"
     else:
         return False, ""
 
