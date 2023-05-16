@@ -1,0 +1,30 @@
+{
+  "types_list": [
+    {
+      "id": 0,
+      "name": "QR-code"
+    },
+    {
+      "id": 1,
+      "name": "Data matrix"
+    },
+    {
+      "id": 2,
+      "name": "Atypical"
+    }
+  ],
+  "objects": [
+    {
+      "image": "00000.jpg",
+      "markup": []
+    },
+    {
+      "image": "00001.jpg",
+      "markup": []
+    },
+    {
+      "image": "00002.jpg",
+      "markup": []
+    }
+  ]
+}

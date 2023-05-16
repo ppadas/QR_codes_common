@@ -57,6 +57,8 @@ def define_folder(qr_counter, dm_counter, atypical_counter):
         return True, "dm_many"  
     elif atypical_counter != 0:
         return True, "atypical"
+    elif atypical_counter == 0 and qr_counter == 0 and dm_counter == 0:
+        return True, "no_codes"
     else:
         return False, ""
 
@@ -76,7 +78,7 @@ if __name__ == "__main__":
     with open(names_translation_path, "r") as f:
         names_translation = json.load(f)
 
-    dirs = ["qr_1", "qr_many", "dm_1", "dm_many", "dm_qr", "atypical", ""]
+    dirs = ["qr_1", "qr_many", "dm_1", "dm_many", "dm_qr", "atypical", "", "no_codes"]
     markups = dict()
 
     for dir_ in dirs:
