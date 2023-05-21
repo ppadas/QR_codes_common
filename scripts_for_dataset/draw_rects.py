@@ -17,7 +17,7 @@ if __name__ == "__main__":
         data = json.load(f)
     
     type_names = dict()
-    colors = [(0, 165, 255), (0, 255, 0), (0, 0, 255)]
+    colors = [(0, 165, 255), (0, 165, 255), (125, 125, 125)]
     for type_value in data["types_list"]:
         type_names[type_value["id"]] = type_value["name"]
 
